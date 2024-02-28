@@ -1,3 +1,5 @@
+"use client";
+
 export default function LoadingState() {
     return (
         <main className="w-full h-full flex items-center justify-center bg-white">

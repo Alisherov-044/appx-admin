@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 
-export function useMenu() {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+export function useMenu(defaultState?: boolean) {
+    const [isOpen, setIsOpen] = useState<boolean>(defaultState ?? false);
 
     const open = () => setIsOpen(true);
     const close = () => setIsOpen(false);

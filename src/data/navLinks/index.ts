@@ -1,5 +1,5 @@
 import { NavLink } from "@/models";
-import { authGuard } from "@/shared/guards";
+import { AuthGuard } from "@/guards";
 
 export const publicNavLinks: NavLink[] = [
     new NavLink(1, "Help", "/help"),
@@ -13,5 +13,5 @@ export const privateNavLinks: NavLink[] = [
 ];
 
 export const getNavLinks = (): NavLink[] => {
-    return authGuard() ? privateNavLinks : publicNavLinks;
+    return AuthGuard() ? privateNavLinks : publicNavLinks;
 };

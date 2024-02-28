@@ -60,4 +60,7 @@
     body {
         @apply w-full h-full bg-background text-foreground overflow-x-hidden;
     }
+    body > main {
+        @apply flex-auto;
+    }
 }

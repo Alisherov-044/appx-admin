@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import { z } from "zod";
+import { AuthGuard } from "@/guards";
+import { useRouter } from "@/hooks";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Checkbox, Icons, Input, Label, form } from "@/components";
@@ -21,9 +23,12 @@ const formScheme = z.object({
 });
 
 export default function LoginPage() {
+    const { redirect } = useRouter();
     const form = useForm<z.infer<typeof formScheme>>({
         resolver: zodResolver(formScheme),
     });
+
+    if (AuthGuard()) return redirect("/dashboard");
 
     function onSubmit(values: z.infer<typeof formScheme>) {
         console.log(values);
@@ -34,7 +39,7 @@ export default function LoginPage() {
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="px-3 py-6 sm:px-6 sm:py-8 bg-white shadow-md rounded-md"
+                    className="px-3 py-6 sm:px-6 sm:py-8 bg-white dark:bg-slate-900 shadow-md rounded-md"
                 >
                     <h1 className="text-xl font-normal mb-5">Login</h1>
                     <div className="flex flex-col">

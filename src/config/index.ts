@@ -1,1 +1,1 @@
-export { siteConfig } from "./siteConfig.ts";
+export { siteConfig } from "./siteConfig";

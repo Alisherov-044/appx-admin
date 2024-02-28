@@ -13,11 +13,11 @@ export default function NotFoundPage() {
             />
             <h1 className="text-xl font-normal mt-8">Oops! Page not found</h1>
             <p className="max-w-[580px] text-center text-muted-foreground text-sm leading-5 font-normal mt-3 mb-8">
-                It's looking like you may have taken a wrong turn. Don't
-                worry... it happens to the best of us. Here's a little tip that
-                might help you get back on track.
+                It&apos;s looking like you may have taken a wrong turn.
+                Don&apos;t worry... it happens to the best of us. Here&apos;s a
+                little tip that might help you get back on track.
             </p>
-            <Link href="/login">
+            <Link href="/">
                 <Button>Back to main</Button>
             </Link>
         </main>

@@ -1,8 +1,15 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { isServer } from "@/utils";
+import { usePathname, useRouter as useNavigation } from "next/navigation";
 
 export function useRouter() {
     const path = usePathname();
+    const navigation = useNavigation();
 
-    return { path };
+    const redirect = (path: string) => {
+        if (isServer()) return null;
+        navigation.push(path);
+    };
+
+    return { path, navigation, redirect };
 }
