@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { useMenu, useRouter } from "@/hooks";
 import { sidebarLinks } from "@/data";
+import { SidebarLinkChild } from "@/models";
+import { useMenu, useRouter } from "@/hooks";
 import { useSidebarContext } from "@/context";
 import { Icons, collapsible, popover } from "@/components";
 import type { FC } from "react";
@@ -16,6 +17,12 @@ type TSidebarCollapsibleButton = {
     isNotCollapsed: boolean;
     title: string;
     Icon: FC<TIcon>;
+};
+
+type TSidebarLinkChildren = {
+    childrenLinks: SidebarLinkChild[];
+    isOpen: boolean;
+    collapse: () => void;
 };
 
 function SidebarCollapsibleButton({
@@ -48,10 +55,44 @@ function SidebarCollapsibleButton({
     );
 }
 
+function SidebarLinkChildren({
+    childrenLinks,
+    isOpen,
+    collapse,
+}: TSidebarLinkChildren) {
+    return (
+        <ul
+            className={cn(
+                isOpen
+                    ? "w-full flex flex-col gap-y-2 text-muted-foreground pl-10 mt-2"
+                    : "w-full flex flex-col gap-y-2 px-4"
+            )}
+        >
+            {childrenLinks.map(({ id, title, url }) => (
+                <li
+                    key={id}
+                    onClick={collapse}
+                    className={cn(
+                        isOpen
+                            ? "hover:underline transition-all duration-150 hover:text-black dark:hover:text-white"
+                            : "hover:underline"
+                    )}
+                >
+                    <Link href={url}>{title}</Link>
+                </li>
+            ))}
+        </ul>
+    );
+}
+
 export function Sidebar() {
     const { path } = useRouter();
     const { isOpen, toggle } = useSidebarContext();
-    const { isOpen: isNotCollapsed, toggle: toggleCollapse } = useMenu();
+    const {
+        isOpen: isNotCollapsed,
+        toggle: toggleCollapse,
+        close: collapse,
+    } = useMenu();
 
     return (
         <>
@@ -99,7 +140,8 @@ export function Sidebar() {
                                             "w-full p-3 overflow-hidden flex items-center gap-x-4 rounded-md transition-all duration-100 hover:bg-gray-200 dark:hover:bg-slate-900",
                                             (path === url ||
                                                 children?.some(
-                                                    (child) => child.url === url
+                                                    (child) =>
+                                                        child.url === path
                                                 )) &&
                                                 "bg-gray-200 dark:bg-slate-900"
                                         )}
@@ -135,26 +177,11 @@ export function Sidebar() {
                                                 />
                                             </CollapsibleTrigger>
                                             <CollapsibleContent>
-                                                <ul className="w-full flex flex-col gap-y-2 text-muted-foreground pl-10 mt-2">
-                                                    {children.map(
-                                                        ({
-                                                            id,
-                                                            title,
-                                                            url,
-                                                        }) => (
-                                                            <li
-                                                                key={id}
-                                                                className="hover:underline transition-all duration-150 hover:text-black dark:hover:text-white"
-                                                            >
-                                                                <Link
-                                                                    href={url}
-                                                                >
-                                                                    {title}
-                                                                </Link>
-                                                            </li>
-                                                        )
-                                                    )}
-                                                </ul>
+                                                <SidebarLinkChildren
+                                                    childrenLinks={children}
+                                                    isOpen={isOpen}
+                                                    collapse={collapse}
+                                                />
                                             </CollapsibleContent>
                                         </Collapsible>
                                     ) : (
@@ -173,26 +200,11 @@ export function Sidebar() {
                                                 align="start"
                                                 className="w-fit"
                                             >
-                                                <ul className="w-full flex flex-col gap-y-2 px-4">
-                                                    {children.map(
-                                                        ({
-                                                            id,
-                                                            title,
-                                                            url,
-                                                        }) => (
-                                                            <li
-                                                                key={id}
-                                                                className="hover:underline"
-                                                            >
-                                                                <Link
-                                                                    href={url}
-                                                                >
-                                                                    {title}
-                                                                </Link>
-                                                            </li>
-                                                        )
-                                                    )}
-                                                </ul>
+                                                <SidebarLinkChildren
+                                                    childrenLinks={children}
+                                                    isOpen={isOpen}
+                                                    collapse={collapse}
+                                                />
                                             </PopoverContent>
                                         </Popover>
                                     )}

@@ -1,11 +1,9 @@
 import type { FC } from "react";
 import type { TIcon } from "@/components/ui/icons";
 
-export type TSidebarChild = {
-    id: number;
-    title: string;
-    url: string;
-};
+export class SidebarLinkChild {
+    constructor(public id: number, public title: string, public url: string) {}
+}
 
 export class SidebarLink {
     constructor(
@@ -13,6 +11,6 @@ export class SidebarLink {
         public title: string,
         public Icon: FC<TIcon>,
         public url?: string,
-        public children?: TSidebarChild[]
+        public children?: SidebarLinkChild[]
     ) {}
 }

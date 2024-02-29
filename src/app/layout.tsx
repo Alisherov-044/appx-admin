@@ -20,6 +20,7 @@ export default function RootLayout({ children }: Readonly<TRootLayout>) {
                     enableSystem
                     attribute="class"
                     defaultTheme="system"
+                    disableTransitionOnChange
                 >
                     {children}
                 </ThemeProvider>

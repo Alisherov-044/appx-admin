@@ -1,11 +1,12 @@
 export { Button } from "./ui/button";
 export * as select from "./ui/select";
 export { Skeleton } from "./ui/skeleton";
-export * as sonner from "./ui/sonner";
+export { Toaster } from "./ui/sonner";
 export * as tooltip from "./ui/tooltip";
 export * as avatar from "./ui/avatar";
 export * as popover from "./ui/popover";
 export * as collapsible from "./ui/collapsible";
+export * as alert from "./ui/alert";
 export { Icons } from "./ui/icons";
 export { Checkbox } from "./form/checkbox";
 export { Input } from "./form/input";

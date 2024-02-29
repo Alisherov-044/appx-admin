@@ -23,7 +23,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     className
                 )}
             >
-                <div className="flex items-center gap-x-2">
+                <div className="flex flex-auto items-center gap-x-2">
                     {prefixIcon && prefixIcon}
                     <input
                         type={
