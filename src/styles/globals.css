@@ -63,4 +63,8 @@
     body > main {
         @apply flex-auto;
     }
+    .table-scroll {
+        @apply w-full;
+        max-width: calc(100vw - 24px);
+    }
 }

@@ -6,9 +6,11 @@ export function AuthGuard(redirectUrl?: string) {
     const { redirect } = useRouter();
     const { get } = useLocalStorage();
 
-    if (redirectUrl) {
+    const isAuth = typeof get(ACCESS_TOKEN_KEY) === "string";
+
+    if (!isAuth && redirectUrl) {
         return redirect(redirectUrl);
     }
 
-    return get(ACCESS_TOKEN_KEY);
+    return isAuth;
 }

@@ -5,9 +5,9 @@ export function useLocalStorage() {
         if (typeof window !== "undefined") {
             const value = localStorage.getItem(key);
             return typeof value === "string" && JSON.parse(value);
-        } else {
-            return false;
         }
+
+        return false;
     };
 
     const set = <T>(key: string, value: T) => {

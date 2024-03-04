@@ -28,7 +28,7 @@ export default function LoginPage() {
         resolver: zodResolver(formScheme),
     });
 
-    if (AuthGuard()) return redirect("/dashboard");
+    // if (AuthGuard()) return redirect("/dashboard");
 
     function onSubmit(values: z.infer<typeof formScheme>) {
         console.log(values);
